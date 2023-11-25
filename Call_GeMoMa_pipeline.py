@@ -25,16 +25,15 @@ parser.add_argument('-bam_dir', metavar='path', type=str, required=True, help='P
 parser.add_argument('-threads', metavar='int', type=str, default='4', required=False, help='Please input the threads number, default=4, [OPTIONAL].')
 parser.add_argument('-maxintron', metavar='int', type=str, default='100000',required=False, help='Please input the max intron [int], default=100000, [OPTIONAL].')
 parser.add_argument('-strand', metavar='rna-strandness', type=str, default='FR_UNSTRANDED', required=False, help='Defines whether the reads are stranded, range={FR_UNSTRANDED, FR_FIRST_STRAND, FR_SECOND_STRAND}, default = FR_UNSTRANDED, [OPTIONAL]')
-parser.add_argument('-group_id', metavar='str', type=str,default='P18Z10200N0107',required=False, help='Please assign the groups, default=P18Z10200N0107, (OPTIONAL).')
 parser.add_argument('-MEM', metavar='int', type=str,default='20',required=False, help='Please assign the Memory size, default=20G, (OPTIONAL).')
 
 args = parser.parse_args()
 #======================================================================================================
 
 
-GeMoMa='/hwfssz1/ST_EARTH/P18Z10200N0160/P18Z10200N0102_GAGA/xiongzj/software/GeMoMa/GeMoMa-1.9.jar'
-run_java = '/share/app/java/jdk1.8.0_261/bin/java'
-mmseq_path = '/hwfssz1/ST_EARTH/Reference/ST_DIVERSITY/PUB/USER/tanshangjin/software/miniconda3/envs/mmseqs2/bin/'
+GeMoMa='/tools/GeMoMa/GeMoMa-1.9.jar'
+run_java = '/tools/JAVA/bin/java'
+mmseq_path = '/tools/mmseqs2/bin/'
 
 
 
@@ -97,8 +96,6 @@ def Pipeline():
     run_feature.close()
     os.chmod('GeMoMaPipeline.sh', 0o775)
 
-    #qsubs = subprocess.run(['qsub', '-clear','-cwd','-q','st.q','-P',args.group_id,'-l','vf='+args.MEM+'g,p='+args.threads,'-binding','linear:'+args.threads,'GeMoMaPipeline.sh'],stdout=subprocess.PIPE,stderr=subprocess.PIPE, check=True)
-    #print(qsubs.stdout.strip().decode())
 
 def main():
     extractor()
